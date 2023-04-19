@@ -13,7 +13,12 @@ const ControllerSection = () => {
     <div className="controller--container">
       <div className="controller--list">
         {scenes.map((scene) => (
-          <div className="controller--item" onClick={() => setActiveScene(scene)}>
+          <div
+            className={`controller--item ${
+              scene.title === activeScene.title ? 'controller--item-active' : ''
+            }`}
+            onClick={() => setActiveScene(scene)}
+          >
             {scene.title}
           </div>
         ))}

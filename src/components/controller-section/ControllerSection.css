@@ -2,6 +2,7 @@
 --bg: #000;
 --hover-bg: #ff90e8;
 --hover-text: #000;
+--active-text: #ff90e8;
 
   position: fixed;
   top: 0;
@@ -28,6 +29,10 @@
 .controller--item:hover, controller--item:active {
   color: var(--hover-text);
   background-color: var(--hover-bg);
+}
+
+.controller--item--active {
+  color: var(--active-text);
 }
 
 .controller--button--container {
