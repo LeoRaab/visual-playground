@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Cube from '../components/Cube';
 import { getRandomIndex } from '../utils';
 import useAppStore from '../store';
+import BaseMesh from '../components/BaseMesh';
 
 const MeshScene = () => {
   const isPlaying = useAppStore((state) => state.isPlaying);
@@ -23,8 +24,8 @@ const MeshScene = () => {
   return (
     <>
       <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <Cube color={randomColor} />
+      <pointLight position={[1, 80, 80]} />
+      <BaseMesh mesh="sphere" size={[1, 64, 64]} color={randomColor} />
       <OrbitControls onEnd={handleControlEnd} autoRotate={isPlaying} />
     </>
   );

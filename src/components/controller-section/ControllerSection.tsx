@@ -15,9 +15,10 @@ const ControllerSection = () => {
         {scenes.map((scene) => (
           <div
             className={`controller--item ${
-              scene.title === activeScene.title ? 'controller--item-active' : ''
+              scene.title === activeScene.title ? 'controller--item--active' : ''
             }`}
             onClick={() => setActiveScene(scene)}
+            key={scene.title}
           >
             {scene.title}
           </div>
