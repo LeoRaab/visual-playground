@@ -3,7 +3,6 @@ import CheckBox from '../elements/CheckBox';
 import List from '../list/List';
 import ListHeader from '../list/ListHeader';
 import ListItem from '../list/ListItem';
-import './controller.css';
 
 const CanvasController = () => {
   const [scenes, isRotating, isAudioReactive, setActiveScene, setRotating, setAudioReactive] =
@@ -16,7 +15,7 @@ const CanvasController = () => {
       state.setAudioReactive,
     ]);
   return (
-    <div className="absolute z-10 top-0 right-0 font-mono font-semibold text-stone-500 p-4">
+    <div className="absolute z-10 top-0 right-0 font-mono font-semibold text-stone-500 p-4 opacity-50 hover:opacity-100">
       <List>
         <ListHeader title="Scenes" />
         {scenes.map((scene) => (

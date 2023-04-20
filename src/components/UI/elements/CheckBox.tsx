@@ -5,17 +5,17 @@ type Props = {
 };
 
 const CheckBox = ({ label, isChecked, onClick }: Props) => (
-  <div className="flex gap-x-4 w-full items-center" onClick={onClick}>
+  <div className="flex space-x-4 w-full items-center cursor-pointer" onClick={onClick}>
     <input
       type="checkbox"
       id="rotate"
       name="rotate"
       onChange={onClick}
       checked={isChecked}
-      className="rounded-md bg-stone-800 border-fuchsia-400 border-2 text-fuchsia-400 focus:ring-fuchsia-400"
+      className="rounded-md bg-stone-800 border-fuchsia-400 border-2 text-fuchsia-400 focus:ring-fuchsia-400 cursor-pointer"
     />
 
-    <label>{label}</label>
+    <label className="cursor-pointer">{label}</label>
   </div>
 );
 
