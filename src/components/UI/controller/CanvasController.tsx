@@ -1,4 +1,8 @@
 import useCanvasStore from '../../../stores/CanvasStore';
+import CheckBox from '../elements/CheckBox';
+import List from '../list/List';
+import ListHeader from '../list/ListHeader';
+import ListItem from '../list/ListItem';
 import './controller.css';
 
 const CanvasController = () => {
@@ -12,43 +16,30 @@ const CanvasController = () => {
       state.setAudioReactive,
     ]);
   return (
-    <div className="controller--container canvas--controller">
-      <div className="controller--list">
+    <div className="absolute z-10 top-0 right-0 font-mono font-semibold text-stone-500 p-4">
+      <List>
+        <ListHeader title="Scenes" />
         {scenes.map((scene) => (
-          <div className="controller--item" onClick={() => setActiveScene(scene)} key={scene.title}>
-            {scene.title}
-          </div>
+          <ListItem onClick={() => setActiveScene(scene)} key={scene.title}>
+            <span className="ml-8">{scene.title}</span>
+          </ListItem>
         ))}
-
-        <div className="controller--item">
-          <div className="controller--checkbox--container" onClick={() => setRotating(!isRotating)}>
-            <input
-              type="checkbox"
-              id="rotate"
-              name="rotate"
-              onChange={() => setRotating(!isRotating)}
-              checked={isRotating}
-            />
-            <label>Rotation</label>
-          </div>
-        </div>
-
-        <div className="controller--item">
-          <div
-            className="controller--checkbox--container"
+        <ListHeader title="Settings" />
+        <ListItem>
+          <CheckBox
+            label="Rotation"
+            isChecked={isRotating}
+            onClick={() => setRotating(!isRotating)}
+          />
+        </ListItem>
+        <ListItem>
+          <CheckBox
+            label="Audio reactive"
+            isChecked={isAudioReactive}
             onClick={() => setAudioReactive(!isAudioReactive)}
-          >
-            <input
-              type="checkbox"
-              id="audioreactive"
-              name="audioreactive"
-              onChange={() => setAudioReactive(!isAudioReactive)}
-              checked={isAudioReactive}
-            />
-            <label>Audio reactive</label>
-          </div>
-        </div>
-      </div>
+          />
+        </ListItem>
+      </List>
     </div>
   );
 };
