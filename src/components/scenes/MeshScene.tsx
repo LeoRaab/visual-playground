@@ -1,12 +1,11 @@
 import { OrbitControls } from '@react-three/drei';
 import { useState } from 'react';
-import Cube from '../components/Cube';
-import { getRandomIndex } from '../utils';
-import useAppStore from '../store';
-import BaseMesh from '../components/BaseMesh';
+import { getRandomIndex } from '../../utils';
+import BaseMesh from '../../components/objects/BaseMesh';
+import useCanvasStore from '../../stores/CanvasStore';
 
 const MeshScene = () => {
-  const isPlaying = useAppStore((state) => state.isPlaying);
+  const isRotating = useCanvasStore((state) => state.isRotating);
 
   const colors = ['hotpink', 'aquamarine', 'orangered', 'indigo', 'gold', 'turquoise'];
 
@@ -26,7 +25,7 @@ const MeshScene = () => {
       <ambientLight />
       <pointLight position={[1, 80, 80]} />
       <BaseMesh mesh="sphere" size={[1, 64, 64]} color={randomColor} />
-      <OrbitControls onEnd={handleControlEnd} autoRotate={isPlaying} />
+      <OrbitControls onEnd={handleControlEnd} autoRotate={isRotating} />
     </>
   );
 };

@@ -1,13 +1,11 @@
 import { create } from 'zustand';
-import MeshScene from '../scenes/MeshScene';
-import ParticleScene from '../scenes/ParticleScene';
 import { SceneItem } from '../type-definitions';
+import MeshScene from '../components/scenes/MeshScene';
+import ParticleScene from '../components/scenes/ParticleScene';
 
-interface AppState {
-  isPlaying: boolean;
+interface SettingsState {
   scenes: SceneItem[];
   activeScene: SceneItem;
-  setIsPlaying: (isPlaying: boolean) => void;
   setActiveScene: (scene: SceneItem) => void;
 }
 
@@ -22,12 +20,10 @@ const scenes = [
   },
 ];
 
-const useAppStore = create<AppState>()((set) => ({
-  isPlaying: false,
+const useSettingsStore = create<SettingsState>()((set) => ({
   scenes,
   activeScene: scenes[0],
-  setIsPlaying: (isPlaying: boolean) => set({ isPlaying }),
   setActiveScene: (scene: SceneItem) => set({ activeScene: scene }),
 }));
 
-export default useAppStore;
+export default useSettingsStore;

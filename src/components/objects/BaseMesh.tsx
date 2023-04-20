@@ -1,5 +1,4 @@
-import { PositionalAudio } from '@react-three/drei';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Mesh } from 'three';
 
 type Props = {

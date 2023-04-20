@@ -1,5 +1,5 @@
-import ControllerSection from './components/controller-section/ControllerSection';
-import SceneContainer from './scenes/SceneContainer';
+import ControllerSection from './components/UI/controller/SettingsController';
+import SceneContainer from './components/CanvasPlayer';
 
 const App = () => {
   return (
