@@ -1,29 +1,45 @@
 .controller--container {
---bg: #000;
+--bg-black: #000;
+--bg-grey: #262626;
 --hover-bg: #ff90e8;
 --hover-text: #000;
 --active-text: #ff90e8;
-
-  position: fixed;
-  top: 0;
-  right: 0;
+  display: flex;
+  justify-content: end;
+  position: fixed;  
   z-index: 1000;
-  padding: 0.6rem;
   font-family: 'Courier New', Courier, monospace;
+  color: #fff;  
+}
+
+.canvas--controller {
+  top: 0;
+  width: 100%;
+}
+
+.audio--controller {
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .controller--list {
   display: flex;
   flex-direction: column;
-  background: rgba(255,255,255, 0.15);
+  background: var(--bg-grey);
   border-radius: 4px;
   padding: 1rem;
+  row-gap: 8px;
+  width: 20%;
 }
 
 .controller--item {
   padding: 1rem;
   cursor: pointer;
   color: #fff;
+  border-bottom: 1px dashed #ff90e8;
 }
 
 .controller--item:hover, controller--item:active {
@@ -31,21 +47,12 @@
   background-color: var(--hover-bg);
 }
 
-.controller--item--active {
-  color: var(--active-text);
-}
-
-.controller--button--container {
-  margin-top: 2rem;
-}
-
-.controller--button {
+.controller--btn {
   color: #fff;
-  border: 1px solid var(--bg);
+  border: 1px solid var(--bg-black);
   border-radius: 4px;
   padding: 0.8em 2em;
-  background: var(--bg);
-  transition: 0.2s;
+  background: var(--bg-black);
   cursor: pointer;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 900;
@@ -54,14 +61,43 @@
   width: 100%;
 }
 
-.controller--button:hover {
+.btn--primary {
+  transition: 0.2s;
+}
+
+.btn--primary:hover {
   color: var(--hover-text);
   transform: translate(-0.05rem,-0.05rem);
   background: var(--hover-bg);
-  box-shadow: 0.25rem 0.25rem var(--bg);
+  box-shadow: 0.25rem 0.25rem var(--bg-black);
 }
 
-.controller--button:active {
+.btn--primary:active {
   transform: translate(0);
   box-shadow: none;
+}
+
+.btn--disabled {
+  background-color: var(--bg-grey);
+}
+
+.btn--disabled:hover {
+  color: #fff;
+  transform: translate(0,0);
+  background: none;
+}
+
+.controller--checkbox--container {
+  display: flex;
+  cursor: pointer;
+  column-gap: 2rem;
+}
+
+.audio--btn--container {
+  display: flex;
+  column-gap: 2rem;
+}
+
+label {
+  cursor: pointer;
 }

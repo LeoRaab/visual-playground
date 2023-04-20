@@ -1,11 +1,13 @@
-import ControllerSection from './components/UI/controller/SettingsController';
-import SceneContainer from './components/CanvasPlayer';
+import CanvasController from './components/UI/controller/CanvasController';
+import CanvasPlayer from './components/CanvasPlayer';
+import AudioController from './components/UI/controller/AudioController';
 
 const App = () => {
   return (
     <>
-      <SceneContainer />
-      <ControllerSection />
+      <CanvasPlayer />
+      <CanvasController />
+      <AudioController />
     </>
   );
 };

@@ -1,15 +1,14 @@
 import { useRef } from 'react';
 import { Points } from 'three';
+import useAudioReactive from '../../hooks/useAudioReactive';
 
 const BasicParticles = () => {
-  // This reference gives us direct access to our points
-  const points = useRef<Points | null>(null);
+  const pointsRef = useRef<Points | null>(null);
+  useAudioReactive({ objectRef: pointsRef });
 
-  // You can see that, like our mesh, points also takes a geometry and a material,
-  // but a specific material => pointsMaterial
   return (
-    <points ref={points}>
-      <sphereGeometry args={[1.5, 6, 128]} />
+    <points ref={pointsRef}>
+      <sphereGeometry args={[1, 92, 16]} />
       <pointsMaterial color="#FAFAFA" size={0.008} sizeAttenuation />
     </points>
   );

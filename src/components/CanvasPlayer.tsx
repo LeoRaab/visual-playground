@@ -1,14 +1,11 @@
-// TODO: Refactor scenes and get common tasks
 import { Canvas } from '@react-three/fiber';
 import Sound from './audio/Sound';
-import useCanvasStore from '../stores/CanvasStore';
+import SceneContainer from './SceneContainer';
 
 const CanvasPlayer = () => {
-  const activeScene = useCanvasStore((state) => state.activeScene);
-
   return (
-    <Canvas camera={{ position: [1, 2, 3] }}>
-      {activeScene.component()}
+    <Canvas>
+      <SceneContainer />
       <Sound />
     </Canvas>
   );

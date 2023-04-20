@@ -1,5 +1,7 @@
+import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
-import { Mesh } from 'three';
+import { Euler, Mesh, Vector3 } from 'three';
+import useAudioReactive from '../../hooks/useAudioReactive';
 
 type Props = {
   mesh: 'box' | 'sphere';
@@ -9,11 +11,11 @@ type Props = {
 
 const BaseMesh = ({ mesh, size, color }: Props) => {
   const meshRef = useRef<Mesh | null>(null);
-
   const meshStyle = mesh === 'box' ? <boxGeometry args={size} /> : <sphereGeometry args={size} />;
+  useAudioReactive({ objectRef: meshRef });
 
   return (
-    <mesh ref={meshRef}>
+    <mesh ref={meshRef} rotation={new Euler(0, 2, 1)}>
       {meshStyle}
       <meshStandardMaterial color={color} />
     </mesh>

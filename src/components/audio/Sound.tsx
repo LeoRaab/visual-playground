@@ -15,8 +15,12 @@ const avg = (array: Uint8Array) => {
 };
 
 const Sound = () => {
-  const { camera } = useThree();
-  const isPlaying = useAudioStore((state) => state.isPlaying);
+  const [isStarted, isPlaying, setStarted, setPlaying] = useAudioStore((state) => [
+    state.isStarted,
+    state.isPlaying,
+    state.setStarted,
+    state.setPlaying,
+  ]);
   const setDynamicZoom = useCanvasStore((state) => state.setDynamicZoom);
   const audioRef = useRef<PositionalAudio | null>(null);
   const analyserRef = useRef<AudioAnalyser | null>(null);
@@ -28,17 +32,30 @@ const Sound = () => {
   useEffect(() => {
     if (!audioRef.current) return;
 
-    audioRef.current.play();
-    analyserRef.current = new AudioAnalyser(audioRef.current, 128);
-    filterRef.current = new BiquadFilterNode(audioRef.current.context, {
-      type: 'lowpass',
-      frequency: 10000,
-    });
-    setFilters([filterRef.current]);
-    //filterRef.current.frequency.value = 10;
+    if (isPlaying) {
+      audioRef.current.play();
+      setStarted(true);
+      analyserRef.current = new AudioAnalyser(audioRef.current, 128);
+      filterRef.current = new BiquadFilterNode(audioRef.current.context, {
+        type: 'lowpass',
+        frequency: 20000,
+      });
+      setFilters([filterRef.current]);
+    }
+
+    if (!isPlaying) {
+      audioRef.current.pause();
+    }
   }, [isPlaying]);
 
-  console.log(audioRef);
+  useEffect(() => {
+    if (!audioRef.current) return;
+    if (!isStarted) {
+      audioRef.current.stop();
+      setStarted(false);
+      setPlaying(false);
+    }
+  }, [isStarted]);
 
   useFrame(() => {
     if (!analyserRef.current) return;
@@ -46,13 +63,13 @@ const Sound = () => {
     const frequencyDataArray = analyserRef.current.getFrequencyData();
     const kickArray = frequencyDataArray.slice(0, 10);
     const zoom = min(avg(kickArray) / 100, 0.7);
-    //setDynamicZoom([zoomLevel, zoomLevel, zoomLevel]);
-    meshRef.current?.scale.lerp(vec.set(zoom, zoom, zoom), 0.15);
+    setDynamicZoom([zoom, zoom, zoom]);
+    //meshRef.current?.scale.lerp(vec.set(zoom, zoom, zoom), 0.15);
   });
 
   return (
     <>
-      {isPlaying && (
+      {(isStarted || isPlaying) && (
         <PositionalAudioComponent
           url="./middle-east.mp3"
           distance={1}
@@ -61,10 +78,10 @@ const Sound = () => {
           filters={filters}
         />
       )}
-      <mesh ref={meshRef} scale={1}>
+      {/* <mesh ref={meshRef} scale={1}>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial color="hotpink" />
-      </mesh>
+      </mesh> */}
     </>
   );
 };
