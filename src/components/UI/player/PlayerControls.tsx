@@ -16,12 +16,16 @@ type Props = {
 };
 
 const PlayerControls = ({ areSettingsOpen, onOpenSettings }: Props) => {
-  const [isStarted, isPlaying, setStarted, setPlaying] = useAudioStore((state) => [
-    state.isStarted,
-    state.isPlaying,
-    state.setStarted,
-    state.setPlaying,
-  ]);
+  const [isStarted, isPlaying, activeSound, setStarted, setPlaying, playNext, playLast] =
+    useAudioStore((state) => [
+      state.isStarted,
+      state.isPlaying,
+      state.activeSound,
+      state.setStarted,
+      state.setPlaying,
+      state.playNext,
+      state.playLast,
+    ]);
 
   return (
     <div
@@ -33,7 +37,7 @@ const PlayerControls = ({ areSettingsOpen, onOpenSettings }: Props) => {
         <PlayerButton onClick={() => setStarted(false)} isDisabled={!isStarted}>
           <StopIcon className="h-8 w-8" />
         </PlayerButton>
-        <PlayerButton onClick={() => console.log('last song')}>
+        <PlayerButton onClick={() => playLast()}>
           <BackwardIcon className="h-8 w-8" />
         </PlayerButton>
       </div>
@@ -42,7 +46,7 @@ const PlayerControls = ({ areSettingsOpen, onOpenSettings }: Props) => {
         {!isPlaying && <PlayIcon className="h-8 w-8" />}
       </PlayerButton>
       <div className="flex-auto flex items-center justify-evenly">
-        <PlayerButton onClick={() => console.log('next song')}>
+        <PlayerButton onClick={() => playNext()}>
           <ForwardIcon className="h-8 w-8" />
         </PlayerButton>
         <PlayerButton onClick={onOpenSettings} keepActive={areSettingsOpen}>

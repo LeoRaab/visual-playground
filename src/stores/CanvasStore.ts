@@ -1,21 +1,7 @@
 import { create } from 'zustand';
 import { SceneItem } from '../type-definitions';
-import MeshScene from '../components/scenes/MeshScene';
-import ParticleScene from '../components/scenes/ParticleScene';
 import { getRandomElement } from '../utils';
-
-const scenes: SceneItem[] = [
-  {
-    id: 0,
-    title: 'Basic Mesh',
-  },
-  {
-    id: 1,
-    title: 'Particles',
-  },
-];
-
-const colors = ['hotpink', 'aquamarine', 'orangered', 'indigo', 'gold', 'turquoise'];
+import { COLORS, SCENES } from '../utils/constants';
 
 interface CanvasState {
   scenes: SceneItem[];
@@ -32,18 +18,18 @@ interface CanvasState {
 }
 
 const useCanvasStore = create<CanvasState>()((set) => ({
-  scenes,
-  activeScene: scenes[0],
+  scenes: SCENES,
+  activeScene: SCENES[0],
   isRotating: false,
   isAudioReactive: false,
   dynamicZoom: [0, 0, 0],
-  randomColor: colors[0],
+  randomColor: COLORS[0],
   setActiveScene: (scene: SceneItem) => set({ activeScene: scene }),
   setAudioReactive: (isAudioReactive: boolean) => set({ isAudioReactive }),
   setDynamicZoom: (zoom: [x: number, y: number, z: number]) => set({ dynamicZoom: zoom }),
   setRotating: (isRotating: boolean) => set({ isRotating }),
   setRandomColor: () =>
-    set((state) => ({ randomColor: getRandomElement<string>(state.randomColor, colors) })),
+    set((state) => ({ randomColor: getRandomElement<string>(state.randomColor, COLORS) })),
 }));
 
 export default useCanvasStore;
