@@ -13,7 +13,6 @@ export type SoundFilter = {
   value: number;
   unit: string;
   isOn: boolean;
-  audioNode: BiquadFilterNode | null;
   min: number;
   max: number;
   step?: number;

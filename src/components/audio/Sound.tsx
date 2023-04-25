@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { PositionalAudio as PositionalAudioComponent } from '@react-three/drei';
 import { PositionalAudio } from 'three';
 import useAudioStore from '../../stores/AudioStore';
@@ -7,16 +7,13 @@ import useAudioAnalyser from '../../hooks/useAudioAnalyzer';
 import useAudioFilters from '../../hooks/useAudioFilters';
 
 const Sound = () => {
-  const [isStarted, isPlaying, activeSound, filters, setStarted, setPlaying] = useAudioStore(
-    (state) => [
-      state.isStarted,
-      state.isPlaying,
-      state.activeSound,
-      state.filters,
-      state.setStarted,
-      state.setPlaying,
-    ]
-  );
+  const [isStarted, isPlaying, activeSound, setStarted, setPlaying] = useAudioStore((state) => [
+    state.isStarted,
+    state.isPlaying,
+    state.activeSound,
+    state.setStarted,
+    state.setPlaying,
+  ]);
   const audioRef = useRef<PositionalAudio | null>(null);
   const activeSoundRef = useRef<SoundFile | null>(null);
 

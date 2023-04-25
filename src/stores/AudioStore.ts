@@ -13,7 +13,6 @@ interface AudioState {
   setPlaying: (isPlaying: boolean) => void;
   playNext: () => void;
   playLast: () => void;
-  setFilters: (filters: SoundFilter[]) => void;
   updateFilterValue: (filterIndex: number, value: number) => void;
   setFilterOn: (filterIndex: number, isOn: boolean) => void;
 }
@@ -33,7 +32,6 @@ const useAudioStore = create<AudioState>()((set) => ({
       isPlaying: true,
     })),
   playLast: () => set((state) => ({ activeSound: getSoundFile('last', state.activeSound) })),
-  setFilters: (filters: SoundFilter[]) => set({ filters }),
   updateFilterValue: (filterIndex: number, value: number) =>
     set((state) => ({
       filters: state.filters.map((filter, index) => {

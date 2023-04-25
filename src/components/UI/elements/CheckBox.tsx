@@ -5,7 +5,7 @@ type Props = {
 };
 
 const CheckBox = ({ label, isChecked, onClick }: Props) => (
-  <div className="flex space-x-4 w-full items-center cursor-pointer" onClick={onClick}>
+  <div className="flex space-x-4 items-center cursor-pointer" onClick={onClick}>
     <input
       type="checkbox"
       id="rotate"

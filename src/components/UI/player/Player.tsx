@@ -6,7 +6,7 @@ const Player = () => {
   const [areSettingsOpen, setSettingsOpen] = useState<boolean>(false);
 
   return (
-    <div className="w-1/5 font-mono text-stone-500">
+    <div className="w-2/5 font-mono text-stone-500">
       {areSettingsOpen && <PlayerSettings />}
 
       <PlayerControls
