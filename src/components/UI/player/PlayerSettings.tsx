@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import CheckBox from '../elements/CheckBox';
 import useAudioStore from '../../../stores/AudioStore';
 import { MusicalNoteIcon } from '@heroicons/react/24/outline';
 import PlayerSettingsTitle from './PlayerSettingsTitle';

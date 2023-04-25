@@ -19,9 +19,6 @@ const Sound = () => {
   );
   const audioRef = useRef<PositionalAudio | null>(null);
   const activeSoundRef = useRef<SoundFile | null>(null);
-  const createdFilters = filters
-    .filter((filter) => filter.audioNode)
-    .map((filter) => filter.audioNode as AudioNode);
 
   useAudioAnalyser({ audio: audioRef.current });
   useAudioFilters({ audio: audioRef.current });
@@ -63,7 +60,6 @@ const Sound = () => {
           distance={1}
           ref={audioRef}
           load={undefined}
-          filters={createdFilters}
         />
       )}
     </>

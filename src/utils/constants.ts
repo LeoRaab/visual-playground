@@ -35,12 +35,12 @@ export const COLORS = ['hotpink', 'aquamarine', 'orangered', 'indigo', 'gold', '
 export const SOUND_FILTERS: SoundFilter[] = [
   {
     type: 'lowpass',
-    value: 10000,
+    value: 500,
     unit: 'Hz',
     isOn: false,
     audioNode: null,
     min: 0,
-    max: 20000,
-    step: 500,
+    max: 5000,
+    step: 100,
   },
 ];
