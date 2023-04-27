@@ -4,7 +4,7 @@ import useAudioReactive from '../../hooks/useAudioReactive';
 
 const BasicParticles = () => {
   const pointsRef = useRef<Points | null>(null);
-  useAudioReactive({ objectRef: pointsRef });
+  useAudioReactive({ meshObject: pointsRef.current });
 
   return (
     <points ref={pointsRef}>

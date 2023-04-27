@@ -3,6 +3,7 @@ import { AudioAnalyser, PositionalAudio } from 'three';
 import useCanvasStore from '../stores/CanvasStore';
 import { useFrame } from '@react-three/fiber';
 import { min, avg } from '../utils';
+import useAudioStore from '../stores/AudioStore';
 
 type Props = {
   audio: PositionalAudio | null;
@@ -10,7 +11,8 @@ type Props = {
 
 const useAudioAnalyser = ({ audio }: Props) => {
   const analyserRef = useRef<AudioAnalyser | null>(null);
-  const setDynamicZoom = useCanvasStore((state) => state.setDynamicZoom);
+  const setFrequencyData = useAudioStore((state) => state.setFrequencyData);
+  const setDynamicVec = useCanvasStore((state) => state.setDynamicVec);
 
   useEffect(() => {
     if (analyserRef.current || !audio) return;
@@ -23,8 +25,10 @@ const useAudioAnalyser = ({ audio }: Props) => {
 
     const frequencyDataArray = analyserRef.current.getFrequencyData();
     const kickArray = frequencyDataArray.slice(0, 10);
-    const zoom = min(avg(kickArray) / 100, 0.7);
-    setDynamicZoom([zoom, zoom, zoom]);
+    setFrequencyData(frequencyDataArray);
+
+    const freq = min(avg(kickArray) / 100, 0.7);
+    setDynamicVec([freq, freq, freq]);
   });
 };
 

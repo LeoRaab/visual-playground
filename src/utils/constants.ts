@@ -28,6 +28,14 @@ export const SCENES: SceneItem[] = [
     id: 1,
     title: 'Particles',
   },
+  {
+    id: 2,
+    title: 'Grid',
+  },
+  {
+    id: 3,
+    title: 'Wave',
+  },
 ];
 
 export const COLORS = ['hotpink', 'aquamarine', 'orangered', 'indigo', 'gold', 'turquoise'];

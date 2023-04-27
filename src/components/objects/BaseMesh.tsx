@@ -12,7 +12,7 @@ type Props = {
 const BaseMesh = ({ mesh, size, color }: Props) => {
   const meshRef = useRef<Mesh | null>(null);
   const meshStyle = mesh === 'box' ? <boxGeometry args={size} /> : <sphereGeometry args={size} />;
-  useAudioReactive({ objectRef: meshRef });
+  useAudioReactive({ meshObject: meshRef.current });
 
   return (
     <mesh ref={meshRef} rotation={new Euler(0, 2, 1)}>

@@ -2,19 +2,26 @@ import { create } from 'zustand';
 import { SceneItem } from '../type-definitions';
 import { getRandomElement } from '../utils';
 import { COLORS, SCENES } from '../utils/constants';
+import { SpringValue } from '@react-spring/three';
 
 interface CanvasState {
   scenes: SceneItem[];
   activeScene: SceneItem;
   isRotating: boolean;
   isAudioReactive: boolean;
-  dynamicZoom: [x: number, y: number, z: number];
+  dynamicVec: [x: number, y: number, z: number];
   randomColor: string;
+  zoom: number;
+  ticksSpring: SpringValue<number> | null;
+  clickSpring: SpringValue<number> | null;
   setActiveScene: (scene: SceneItem) => void;
   setAudioReactive: (isAudioReactive: boolean) => void;
-  setDynamicZoom: (zoom: [x: number, y: number, z: number]) => void;
+  setDynamicVec: (vec: [x: number, y: number, z: number]) => void;
   setRotating: (isRotating: boolean) => void;
   setRandomColor: () => void;
+  setZoom: (zoom: number) => void;
+  setTicksSpring: (ticks: SpringValue<number>) => void;
+  setClickSpring: (click: SpringValue<number>) => void;
 }
 
 const useCanvasStore = create<CanvasState>()((set) => ({
@@ -22,14 +29,20 @@ const useCanvasStore = create<CanvasState>()((set) => ({
   activeScene: SCENES[0],
   isRotating: false,
   isAudioReactive: false,
-  dynamicZoom: [0, 0, 0],
+  dynamicVec: [0, 0, 0],
   randomColor: COLORS[0],
+  zoom: 20,
+  ticksSpring: null,
+  clickSpring: null,
   setActiveScene: (scene: SceneItem) => set({ activeScene: scene }),
   setAudioReactive: (isAudioReactive: boolean) => set({ isAudioReactive }),
-  setDynamicZoom: (zoom: [x: number, y: number, z: number]) => set({ dynamicZoom: zoom }),
+  setDynamicVec: (vec: [x: number, y: number, z: number]) => set({ dynamicVec: vec }),
   setRotating: (isRotating: boolean) => set({ isRotating }),
   setRandomColor: () =>
     set((state) => ({ randomColor: getRandomElement<string>(state.randomColor, COLORS) })),
+  setZoom: (zoom: number) => set({ zoom }),
+  setTicksSpring: (ticks: SpringValue<number>) => set({ ticksSpring: ticks }),
+  setClickSpring: (click: SpringValue<number>) => set({ clickSpring: click }),
 }));
 
 export default useCanvasStore;

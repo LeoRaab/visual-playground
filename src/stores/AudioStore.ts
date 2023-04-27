@@ -9,12 +9,14 @@ interface AudioState {
   sounds: SoundFile[];
   activeSound: SoundFile;
   filters: SoundFilter[];
+  frequencyData: Uint8Array;
   setStarted: (isStarted: boolean) => void;
   setPlaying: (isPlaying: boolean) => void;
   playNext: () => void;
   playLast: () => void;
   updateFilterValue: (filterIndex: number, value: number) => void;
   setFilterOn: (filterIndex: number, isOn: boolean) => void;
+  setFrequencyData: (frequencyData: Uint8Array) => void;
 }
 
 const useAudioStore = create<AudioState>()((set) => ({
@@ -23,6 +25,7 @@ const useAudioStore = create<AudioState>()((set) => ({
   sounds: SOUNDS,
   filters: SOUND_FILTERS,
   activeSound: SOUNDS[0],
+  frequencyData: new Uint8Array(),
   setStarted: (isStarted: boolean) => set({ isStarted, isPlaying: isStarted }),
   setPlaying: (isPlaying: boolean) => set({ isPlaying }),
   playNext: () =>
@@ -56,6 +59,7 @@ const useAudioStore = create<AudioState>()((set) => ({
         return filter;
       }),
     })),
+  setFrequencyData: (frequencyData: Uint8Array) => set({ frequencyData }),
 }));
 
 export default useAudioStore;
